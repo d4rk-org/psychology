@@ -1,4 +1,4 @@
 # Psychology & Philosophy Center
 
 ## Progress -
-![](https://progress-bar.dev/0)
+![](https://progress-bar.dev/30)
