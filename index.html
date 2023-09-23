@@ -135,6 +135,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             const navigationLinks = document.querySelectorAll(".navigation a");
             const bookContainer = document.getElementById("book-container");
+            const bookButtonsContainer = document.getElementById("book-buttons");
             const converter = new showdown.Converter();
 
             // Function to load and render Markdown content
@@ -147,6 +148,18 @@
                 } catch (error) {
                     console.error("Error loading the Markdown book:", error);
                 }
+            };
+
+            // Function to create book buttons from GitHub API response
+            const createBookButtons = (files) => {
+                files.forEach((file) => {
+                    const button = document.createElement("button");
+                    button.textContent = file.name.replace('.md', ''); // Use the filename as button label
+                    button.addEventListener("click", () => {
+                        loadMarkdownBook(file.download_url);
+                    });
+                    bookButtonsContainer.appendChild(button);
+                });
             };
 
             // Event listeners for navigation links
@@ -166,18 +179,18 @@
 
             // Load the Home page by default
             loadMarkdownBook("/psychology/home.md");
-        });
 
-        const loadMarkdownBook = async (url) => {
-            try {
-                const response = await fetch(url);
-                const markdownText = await response.text();
-                const htmlText = converter.makeHtml(markdownText);
-                bookContainer.innerHTML = htmlText;
-            } catch (error) {
-                console.error("Error loading the Markdown book:", error);
-            }
-        };
+            // Fetch the list of available books from your GitHub repository
+            fetch('https://api.github.com/repos/D4RKH0R1Z0N/psychology/contents/')
+                .then(response => response.json())
+                .then(data => {
+                    const markdownFiles = data.filter(file => file.name.endsWith('.md'));
+                    createBookButtons(markdownFiles);
+                })
+                .catch(error => {
+                    console.error("Error fetching book list from GitHub:", error);
+                });
+        });
     </script>
 </body>
 </html>
