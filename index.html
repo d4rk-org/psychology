@@ -199,13 +199,13 @@
                         window.open("https://github.com/D4RKH0R1Z0N/psychology", "_blank");
                     } else {
                         // Load and render the corresponding Markdown file
-                        loadMarkdownBook(`/psychology/${id}.md`);
+                        loadMarkdownBook(`/psychology/data/${id}.md`);
                     }
                 });
             });
 
             // Load the Home page by default
-            loadMarkdownBook("/psychology/home.md");
+            loadMarkdownBook("/psychology/data/home.md");
 
             // Fetch the list of available books from your GitHub repository
             fetch('https://api.github.com/repos/D4RKH0R1Z0N/psychology/contents/')
