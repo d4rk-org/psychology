@@ -51,10 +51,13 @@
         
         .library {
             margin-top: 20px;
+            display: flex;
+            flex-direction: row; /* Display books in a single row */
             white-space: nowrap; /* Prevent books from wrapping to the next line */
-            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-x: auto; /* Enable horizontal scrolling for the book container */
             overflow-y: hidden; /* Hide vertical overflow */
             scrollbar-width: thin; /* Set scrollbar width to 5px (light) */
+            max-width: 80%; /* Ensure the container does not exceed the viewport width */
         }
         
         .book {
@@ -108,6 +111,28 @@
             background-color: #555;
             transform: scale(1.05);
         }
+
+        /* Scrollbar Styles (for WebKit browsers like Chrome and Safari) */
+        .library::-webkit-scrollbar {
+            width: 5px; /* Set the width of the scrollbar */
+        }
+        
+        /* Track */
+        .library::-webkit-scrollbar-track {
+            background: #a0a0a0; /* Background color of the track */
+            border-radius: 5px; /* Rounded corners for the track */
+        }
+        
+        /* Handle */
+        .library::-webkit-scrollbar-thumb {
+            background: #555; /* Color of the scrollbar handle */
+            border-radius: 5px; /* Rounded corners for the scrollbar handle */
+        }
+        
+        /* Handle on hover */
+        .library::-webkit-scrollbar-thumb:hover {
+            background: #6c6c6c; /* Slightly lighter color for the scrollbar handle on hover */
+        }
     </style>
 </head>
 <body>
@@ -123,6 +148,8 @@
     </div>
 
     <div class="library" id="book-buttons"></div>
+
+    <br>
 
     <div class="book-content" id="book-container">
         <!-- Markdown content will be dynamically loaded here -->
