@@ -1,2 +1,4 @@
-# psychology
-The Psychology and Philosophy Center, a collection of my works in psychology and philosophy
+# Psychology & Philosophy Center
+
+## Progress -
+![](https://progress-bar.dev/0)
