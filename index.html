@@ -122,6 +122,10 @@
         <div id="book-buttons"></div>
     </div>
 
+    <div class="book-content" id="book-container">
+        <!-- Markdown content will be dynamically loaded here -->
+    </div>
+
     <div class="books-section" id="book-section">
         <div class="book-title"></div>
         <div class="book-content"></div>
@@ -180,7 +184,7 @@
             loadMarkdownBook("/psychology/home.md");
 
             // Fetch the list of available books from your GitHub repository
-            fetch('https://api.github.com/repos/D4RKH0R1Z0N/psychology/')
+            fetch('https://api.github.com/repos/D4RKH0R1Z0N/psychology/contents/')
                 .then(response => response.json())
                 .then(data => {
                     const markdownFiles = data.filter(file => file.name.endsWith('.md'));
