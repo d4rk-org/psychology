@@ -1,1 +1,122 @@
-[To be added]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychology and Philosophy Library</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cascadia Code', monospace;
+            background-color: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .navigation {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            font-size: 20px;
+        }
+
+        .library {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .book {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .book:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Psychology and Philosophy Library</h1>
+        <p>Explore a wide range of topics in psychology and philosophy.</p>
+    </div>
+
+    <div class="navigation">
+        <a href="#" id="home">Home</a>
+        <a href="#" id="about">About</a>
+        <a href="#" id="contact">Contact</a>
+        <a href="#" id="github">GitHub</a>
+    </div>
+
+    <div class="library" id="book-container">
+        <!-- Books will be dynamically loaded here -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const navigationLinks = document.querySelectorAll(".navigation a");
+            const bookContainer = document.getElementById("book-container");
+
+            // Function to load and render Markdown content
+            const loadMarkdownBook = async (url) => {
+                try {
+                    const response = await fetch(url);
+                    const markdownText = await response.text();
+                    const converter = new showdown.Converter();
+                    const htmlText = converter.makeHtml(markdownText);
+                    bookContainer.innerHTML = htmlText;
+                } catch (error) {
+                    console.error("Error loading the Markdown book:", error);
+                }
+            };
+
+            // Event listeners for navigation links
+            navigationLinks.forEach((link) => {
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    const id = event.target.id;
+                    if (id === "github") {
+                        // Replace with your GitHub repository URL
+                        window.open("https://github.com/D4RKH0R1Z0N/psychology", "_blank");
+                    } else {
+                        // Load and render the corresponding Markdown file
+                        loadMarkdownBook(`https://raw.githubusercontent.com/yourusername/yourrepository/master/${id}.md`);
+                    }
+                });
+            });
+
+            // Load the Home page by default
+            loadMarkdownBook("https://raw.githubusercontent.com/yourusername/yourrepository/master/home.md");
+        });
+    </script>
+</body>
+</html>
