@@ -135,18 +135,15 @@
         document.addEventListener("DOMContentLoaded", () => {
             const navigationLinks = document.querySelectorAll(".navigation a");
             const bookContainer = document.getElementById("book-container");
-            const booksSection = document.getElementById("book-section");
-            const bookTitle = document.querySelector(".book-title");
-            const bookContent = document.querySelector(".book-content");
+            const converter = new showdown.Converter();
 
             // Function to load and render Markdown content
             const loadMarkdownBook = async (url) => {
                 try {
                     const response = await fetch(url);
                     const markdownText = await response.text();
-                    const converter = new showdown.Converter();
                     const htmlText = converter.makeHtml(markdownText);
-                    bookContent.innerHTML = htmlText;
+                    bookContainer.innerHTML = htmlText;
                 } catch (error) {
                     console.error("Error loading the Markdown book:", error);
                 }
@@ -163,15 +160,12 @@
                     } else {
                         // Load and render the corresponding Markdown file
                         loadMarkdownBook(`/psychology/${id}.md`);
-                        bookTitle.textContent = id; // Set the book title
-                        booksSection.style.display = "block"; // Show the books section
                     }
                 });
             });
 
             // Load the Home page by default
             loadMarkdownBook("/psychology/home.md");
-            bookTitle.textContent = "Home"; // Set the default title
         });
     </script>
 </body>
