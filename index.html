@@ -57,10 +57,45 @@
             border-radius: 10px;
             text-align: center;
             width: 200px;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .book:hover {
             transform: scale(1.05);
+        }
+
+        /* New Books Section Styles */
+        .books-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .book-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .book-content {
+            display: none;
+            padding: 20px;
+            background-color: #222;
+            color: #fff;
+            border-radius: 10px;
+            width: 70%;
+            text-align: left;
+        }
+
+        /* Animation Styles */
+        @keyframes neural-network {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .neural-network {
+            animation: neural-network 10s linear infinite;
         }
     </style>
 </head>
@@ -81,6 +116,11 @@
         <!-- Books will be dynamically loaded here -->
     </div>
 
+    <div class="books-section" id="book-section">
+        <div class="book-title"></div>
+        <div class="book-content"></div>
+    </div>
+
     <!-- Include Showdown library from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
@@ -88,6 +128,9 @@
         document.addEventListener("DOMContentLoaded", () => {
             const navigationLinks = document.querySelectorAll(".navigation a");
             const bookContainer = document.getElementById("book-container");
+            const booksSection = document.getElementById("book-section");
+            const bookTitle = document.querySelector(".book-title");
+            const bookContent = document.querySelector(".book-content");
 
             // Function to load and render Markdown content
             const loadMarkdownBook = async (url) => {
@@ -96,7 +139,7 @@
                     const markdownText = await response.text();
                     const converter = new showdown.Converter();
                     const htmlText = converter.makeHtml(markdownText);
-                    bookContainer.innerHTML = htmlText;
+                    bookContent.innerHTML = htmlText;
                 } catch (error) {
                     console.error("Error loading the Markdown book:", error);
                 }
@@ -113,12 +156,15 @@
                     } else {
                         // Load and render the corresponding Markdown file
                         loadMarkdownBook(`/psychology/${id}.md`);
+                        bookTitle.textContent = id; // Set the book title
+                        booksSection.style.display = "block"; // Show the books section
                     }
                 });
             });
 
             // Load the Home page by default
             loadMarkdownBook("/psychology/home.md");
+            bookTitle.textContent = "Home"; // Set the default title
         });
     </script>
 </body>
