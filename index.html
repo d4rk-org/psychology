@@ -167,6 +167,17 @@
             // Load the Home page by default
             loadMarkdownBook("/psychology/home.md");
         });
+
+        const loadMarkdownBook = async (url) => {
+            try {
+                const response = await fetch(url);
+                const markdownText = await response.text();
+                const htmlText = converter.makeHtml(markdownText);
+                bookContainer.innerHTML = htmlText;
+            } catch (error) {
+                console.error("Error loading the Markdown book:", error);
+            }
+        };
     </script>
 </body>
 </html>
