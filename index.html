@@ -51,12 +51,10 @@
         
         .library {
             margin-top: 20px;
-            display: flex;
-            flex-wrap: nowrap; /* Prevent wrapping of books */
+            white-space: nowrap; /* Prevent books from wrapping to the next line */
             overflow-x: auto; /* Enable horizontal scrolling */
-            background-color: #333;
-            color: #fff;
-            border-radius: 10px;
+            overflow-y: hidden; /* Hide vertical overflow */
+            scrollbar-width: thin; /* Set scrollbar width to 5px (light) */
         }
         
         .book {
@@ -124,9 +122,7 @@
         <a href="#" id="github">GitHub</a>
     </div>
 
-    <div class="library">
-        <div id="book-buttons"></div>
-    </div>
+    <div class="library" id="book-buttons"></div>
 
     <div class="book-content" id="book-container">
         <!-- Markdown content will be dynamically loaded here -->
