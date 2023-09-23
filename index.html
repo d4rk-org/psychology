@@ -208,7 +208,7 @@
             loadMarkdownBook("/psychology/data/home.md");
 
             // Fetch the list of available books from your GitHub repository
-            fetch('https://api.github.com/repos/D4RKH0R1Z0N/psychology/contents/')
+            fetch('https://api.github.com/repos/D4RKH0R1Z0N/psychology/data/contents/')
                 .then(response => response.json())
                 .then(data => {
                     const markdownFiles = data.filter(file => file.name.endsWith('.md'));
