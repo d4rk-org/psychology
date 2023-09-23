@@ -81,6 +81,9 @@
         <!-- Books will be dynamically loaded here -->
     </div>
 
+    <!-- Include Showdown library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const navigationLinks = document.querySelectorAll(".navigation a");
@@ -109,13 +112,13 @@
                         window.open("https://github.com/D4RKH0R1Z0N/psychology", "_blank");
                     } else {
                         // Load and render the corresponding Markdown file
-                        loadMarkdownBook(`https://github.com/D4RKH0R1Z0N/psychology/master/${id}.md`);
+                        loadMarkdownBook(`/${id}.md`);
                     }
                 });
             });
 
             // Load the Home page by default
-            loadMarkdownBook("https://github.com/D4RKH0R1Z0N/psychology/master/home.md");
+            loadMarkdownBook("/home.md");
         });
     </script>
 </body>
