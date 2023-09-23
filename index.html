@@ -52,8 +52,11 @@
         .library {
             margin-top: 20px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-wrap: nowrap; /* Prevent wrapping of books */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            background-color: #333;
+            color: #fff;
+            border-radius: 10px;
         }
         
         .book {
@@ -73,7 +76,6 @@
         }
         /* New Books Section Styles */
         .books-section {
-            display: none;
             flex-direction: column;
             align-items: center;
             text-align: center;
@@ -85,23 +87,11 @@
         }
 
         .book-content {
-            display: none;
             padding: 20px;
             background-color: #222;
             color: #fff;
             border-radius: 10px;
             width: 70%;
-            text-align: left;
-        }
-
-        /* Animation Styles */
-        @keyframes neural-network {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .neural-network {
-            animation: neural-network 10s linear infinite;
         }
 
         /* CSS for the buttons in the library section */
@@ -131,7 +121,6 @@
     <div class="navigation">
         <a href="#" id="home">Home</a>
         <a href="#" id="about">About</a>
-        <a href="#" id="contact">Contact</a>
         <a href="#" id="github">GitHub</a>
     </div>
 
@@ -141,11 +130,6 @@
 
     <div class="book-content" id="book-container">
         <!-- Markdown content will be dynamically loaded here -->
-    </div>
-
-    <div class="books-section" id="book-section">
-        <div class="book-title"></div>
-        <div class="book-content"></div>
     </div>
 
     <!-- Include Showdown library from CDN -->
